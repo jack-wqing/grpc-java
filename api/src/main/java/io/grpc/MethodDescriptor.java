@@ -51,6 +51,7 @@ public final class MethodDescriptor<ReqT, RespT> {
 
   // Must be set to InternalKnownTransport.values().length
   // Not referenced to break the dependency.
+  // Transport设置
   private final AtomicReferenceArray<Object> rawMethodNames = new AtomicReferenceArray<>(2);
 
   /**

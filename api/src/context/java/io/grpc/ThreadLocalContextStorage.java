@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 /**
  * A {@link ThreadLocal}-based context storage implementation.  Used by default.
  */
+// 基于ThreadLocal Storage
 final class ThreadLocalContextStorage extends Context.Storage {
   private static final Logger log = Logger.getLogger(ThreadLocalContextStorage.class.getName());
 

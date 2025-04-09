@@ -21,6 +21,7 @@ package io.grpc;
  *
  * <p>Make sure to update MethodDescriptor.rawMethodNames if this is changed.
  */
+// Transports实现得方式
 @Internal
 public enum InternalKnownTransport {
   NETTY,
