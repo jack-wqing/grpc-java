@@ -72,6 +72,7 @@ import javax.net.ssl.SSLException;
 /**
  * A builder to help simplify construction of channels using the Netty transport.
  */
+// Netty实现的ChannelBuilder
 @ExperimentalApi("https://github.com/grpc/grpc-java/issues/1784")
 @CheckReturnValue
 public final class NettyChannelBuilder extends ForwardingChannelBuilder2<NettyChannelBuilder> {
@@ -187,7 +188,7 @@ public final class NettyChannelBuilder extends ForwardingChannelBuilder2<NettyCh
       return buildTransportFactory();
     }
   }
-
+  // DefaultPort
   private final class NettyChannelDefaultPortProvider implements ChannelBuilderDefaultPortProvider {
     @Override
     public int getDefaultPort() {
@@ -699,6 +700,7 @@ public final class NettyChannelBuilder extends ForwardingChannelBuilder2<NettyCh
   /**
    * Creates Netty transports. Exposed for internal use, as it should be private.
    */
+  // ClientTransportFactrou
   private static final class NettyTransportFactory implements ClientTransportFactory {
     private final ProtocolNegotiator protocolNegotiator;
     private final ChannelFactory<? extends Channel> channelFactory;

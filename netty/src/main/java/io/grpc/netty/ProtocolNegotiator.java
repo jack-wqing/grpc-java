@@ -24,6 +24,7 @@ import java.util.concurrent.Executor;
 /**
  * An class that provides a Netty handler to control protocol negotiation.
  */
+// 支持协议协商
 interface ProtocolNegotiator {
 
   /**

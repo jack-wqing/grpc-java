@@ -31,6 +31,7 @@ import io.grpc.ManagedChannelProvider.ProviderNotFoundException;
  * exceptions may reasonably occur for implementation-specific reasons, implementations should
  * generally handle the exception gracefully and return {@code false} from {@link #isAvailable()}.
  */
+// 服务端提供者实现
 @Internal
 public abstract class ServerProvider {
   /**

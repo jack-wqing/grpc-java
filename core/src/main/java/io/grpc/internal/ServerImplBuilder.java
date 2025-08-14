@@ -54,6 +54,7 @@ import javax.annotation.Nullable;
 /**
  * Default builder for {@link io.grpc.Server} instances, for usage in Transport implementations.
  */
+// Server 实现的Builder
 public final class ServerImplBuilder extends ServerBuilder<ServerImplBuilder> {
 
   private static final Logger log = Logger.getLogger(ServerImplBuilder.class.getName());
@@ -80,6 +81,7 @@ public final class ServerImplBuilder extends ServerBuilder<ServerImplBuilder> {
   final List<ServerTransportFilter> transportFilters = new ArrayList<>();
   final List<ServerInterceptor> interceptors = new ArrayList<>();
   private final List<ServerStreamTracer.Factory> streamTracerFactories = new ArrayList<>();
+  // InternalServer： NettyServer
   private final ClientTransportServersBuilder clientTransportServersBuilder;
   HandlerRegistry fallbackRegistry = DEFAULT_FALLBACK_REGISTRY;
   ObjectPool<? extends Executor> executorPool = DEFAULT_EXECUTOR_POOL;
@@ -93,8 +95,10 @@ public final class ServerImplBuilder extends ServerBuilder<ServerImplBuilder> {
   private boolean recordRealTimeMetrics = false;
   private boolean tracingEnabled = true;
   @Nullable BinaryLog binlog;
+  // 内部统计
   InternalChannelz channelz = InternalChannelz.instance();
   CallTracer.Factory callTracerFactory = CallTracer.getDefaultFactory();
+  // ServerCallExecutor
   @Nullable
   ServerCallExecutorSupplier executorSupplier;
 

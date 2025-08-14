@@ -22,6 +22,7 @@ import javax.annotation.concurrent.ThreadSafe;
 /**
  * A {@link ManagedClientTransport} that is based on a connection.
  */
+// ManagedClientTransport: 基于一个连接
 @ThreadSafe
 public interface ConnectionClientTransport extends ManagedClientTransport {
   /**

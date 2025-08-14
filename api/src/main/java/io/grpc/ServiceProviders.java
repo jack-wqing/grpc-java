@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
 
+// java spi 加载
 final class ServiceProviders {
   private ServiceProviders() {
     // do not instantiate

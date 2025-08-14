@@ -35,6 +35,8 @@ import javax.annotation.concurrent.ThreadSafe;
  * {@link io.grpc.ServerCall.Listener ServerCall.Listener} docs for more details regarding thread
  * safety of the returned listener.
  */
+
+// 服务端操作拦截器: 权限验证，日志和监控，转发到其他的server
 @ThreadSafe
 public interface ServerInterceptor {
   /**

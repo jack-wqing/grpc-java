@@ -27,6 +27,7 @@ import javax.annotation.concurrent.ThreadSafe;
 /**
  * Encloses classes related to the compression and decompression of messages.
  */
+// 默认是gzip压缩
 @ExperimentalApi("https://github.com/grpc/grpc-java/issues/1704")
 @ThreadSafe
 public final class CompressorRegistry {

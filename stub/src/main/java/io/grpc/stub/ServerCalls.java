@@ -109,6 +109,7 @@ public final class ServerCalls {
     @Override StreamObserver<ReqT> invoke(StreamObserver<RespT> responseObserver);
   }
 
+  // 一元UnaryServerCallHandler
   private static final class UnaryServerCallHandler<ReqT, RespT>
       implements ServerCallHandler<ReqT, RespT> {
 
@@ -134,7 +135,7 @@ public final class ServerCalls {
       call.request(2);
       return new UnaryServerCallListener(responseObserver, call);
     }
-
+  // 一元ServerCall
     private final class UnaryServerCallListener extends ServerCall.Listener<ReqT> {
       private final ServerCall<ReqT, RespT> call;
       private final ServerCallStreamObserverImpl<ReqT, RespT> responseObserver;
@@ -215,7 +216,7 @@ public final class ServerCalls {
       }
     }
   }
-
+  // 服务端的ServerCall
   private static final class StreamingServerCallHandler<ReqT, RespT>
       implements ServerCallHandler<ReqT, RespT> {
 

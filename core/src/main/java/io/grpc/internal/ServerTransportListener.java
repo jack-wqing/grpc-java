@@ -23,6 +23,7 @@ import io.grpc.Metadata;
  * A observer of a server-side transport for stream creation events. Notifications must occur from
  * the transport thread.
  */
+// 监听服务端流创建的事件
 public interface ServerTransportListener {
   /**
    * Called when a new stream was created by the remote client.
@@ -40,6 +41,7 @@ public interface ServerTransportListener {
    *
    * @return the effective transport attributes that is used as the basis of call attributes
    */
+  // 传输准备好了
   Attributes transportReady(Attributes attributes);
 
   /**

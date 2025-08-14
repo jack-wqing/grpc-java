@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
  *
  * @param <T> The concrete type of this builder.
  */
+// 消费端ManagedChannel构造器
 public abstract class ManagedChannelBuilder<T extends ManagedChannelBuilder<T>> {
   /**
    * Creates a channel with the target's address and port number.

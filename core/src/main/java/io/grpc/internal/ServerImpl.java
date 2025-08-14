@@ -91,6 +91,7 @@ import javax.annotation.concurrent.GuardedBy;
  * <p>Starting the server starts the underlying transport for servicing requests. Stopping the
  * server stops servicing new requests and waits for all connections to terminate.
  */
+// 期望使用TCP传输，可以实现TcpTransportServer，默认实现是NettyServer
 public final class ServerImpl extends io.grpc.Server implements InternalInstrumented<ServerStats> {
   private static final Logger log = Logger.getLogger(ServerImpl.class.getName());
   private static final ServerStreamListener NOOP_LISTENER = new NoopListener();
@@ -114,6 +115,7 @@ public final class ServerImpl extends io.grpc.Server implements InternalInstrume
   @GuardedBy("lock") private boolean serverShutdownCallbackInvoked;
   @GuardedBy("lock") private boolean terminated;
   /** Service encapsulating something similar to an accept() socket. */
+  // 默认是NettyServer
   private final InternalServer transportServer;
   private final Object lock = new Object();
   @GuardedBy("lock") private boolean transportServersTerminated;
@@ -174,6 +176,7 @@ public final class ServerImpl extends io.grpc.Server implements InternalInstrume
    * @throws IllegalStateException if already started
    * @throws IOException if unable to bind
    */
+  // 启动服务端
   @Override
   public ServerImpl start() throws IOException {
     synchronized (lock) {
@@ -364,6 +367,7 @@ public final class ServerImpl extends io.grpc.Server implements InternalInstrume
     }
   }
 
+
   private final class ServerListenerImpl implements ServerListener {
 
     @Override
@@ -405,6 +409,7 @@ public final class ServerImpl extends io.grpc.Server implements InternalInstrume
     }
   }
 
+  //流创建的监听
   private final class ServerTransportListenerImpl implements ServerTransportListener {
     private final ServerTransport transport;
     private Future<?> handshakeTimeoutFuture;
@@ -500,10 +505,11 @@ public final class ServerImpl extends io.grpc.Server implements InternalInstrume
       final Context.CancellableContext context = createContext(headers, statsTraceCtx);
 
       final Link link = PerfMark.linkOut();
-
+      // I/O线程到应用线程: 及构建四种类型方法的逻辑
       final JumpToApplicationThreadServerStreamListener jumpListener
           = new JumpToApplicationThreadServerStreamListener(
                   wrappedExecutor, executor, stream, context, tag);
+      // I/0线程的流
       stream.setListener(jumpListener);
       final SettableFuture<ServerCallParameters<?,?>> future = SettableFuture.create();
       // Run in serializing executor so jumpListener.setListener() is called before any callbacks
@@ -563,7 +569,7 @@ public final class ServerImpl extends io.grpc.Server implements InternalInstrume
             throw t;
           }
         }
-
+        // 执行线程切换
         private <ReqT, RespT> ServerCallParameters<ReqT, RespT> maySwitchExecutor(
             final ServerMethodDefinition<ReqT, RespT> methodDef,
             final ServerStream stream,
@@ -673,15 +679,18 @@ public final class ServerImpl extends io.grpc.Server implements InternalInstrume
               stream.getAttributes(),
               stream.getAuthority()));
       ServerCallHandler<ReqT, RespT> handler = methodDef.getServerCallHandler();
+      // 服务端ServerInterceptor拦截 ServerCallHandler
       for (ServerInterceptor interceptor : interceptors) {
         handler = InternalServerInterceptors.interceptCallHandlerCreate(interceptor, handler);
       }
+      // 通过服务端拦截的包装的ServerCallHandler: ServerMethodDefinition
       ServerMethodDefinition<ReqT, RespT> interceptedDef = methodDef.withServerCallHandler(handler);
       ServerMethodDefinition<?, ?> wMethodDef = binlog == null
           ? interceptedDef : binlog.wrapMethodDefinition(interceptedDef);
       return wMethodDef;
     }
 
+    // ServerCallImpl + ServerCallHandler
     private final class ServerCallParameters<ReqT, RespT> {
       ServerCallImpl<ReqT, RespT> call;
       ServerCallHandler<ReqT, RespT> callHandler;
@@ -693,6 +702,7 @@ public final class ServerImpl extends io.grpc.Server implements InternalInstrume
       }
     }
 
+    // S
     private <WReqT, WRespT> ServerStreamListener startWrappedCall(
         String fullMethodName,
         ServerCallParameters<WReqT, WRespT> params,

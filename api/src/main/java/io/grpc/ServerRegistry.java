@@ -32,6 +32,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * Registry of {@link ServerProvider}s. The {@link #getDefaultRegistry default instance} loads
  * providers at runtime through the Java service provider mechanism.
  */
+// Java SPI机制提供 ServerProvider的Registry
 @Internal
 @ThreadSafe
 public final class ServerRegistry {
@@ -73,6 +74,7 @@ public final class ServerRegistry {
     refreshProviders();
   }
 
+  // 升序排序 值越大优先级越高
   private synchronized void refreshProviders() {
     List<ServerProvider> providers = new ArrayList<>(allProviders);
     // Sort descending based on priority.
@@ -120,6 +122,7 @@ public final class ServerRegistry {
     return providers.isEmpty() ? null : providers.get(0);
   }
 
+  // Android OKHttpServerProvider
   @VisibleForTesting
   static List<Class<?>> getHardCodedClasses() {
     // Class.forName(String) is used to remove the need for ProGuard configuration. Note that

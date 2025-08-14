@@ -92,6 +92,7 @@ import javax.annotation.Nullable;
  * Client-side Netty handler for GRPC processing. All event handlers are executed entirely within
  * the context of the Netty Channel thread.
  */
+// ClientNettyHandler GRPC processing
 class NettyClientHandler extends AbstractNettyHandler {
   private static final Logger logger = Logger.getLogger(NettyClientHandler.class.getName());
 

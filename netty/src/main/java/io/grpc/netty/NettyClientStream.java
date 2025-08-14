@@ -53,6 +53,7 @@ import javax.annotation.Nullable;
  * Client stream for a Netty transport. Must only be called from the sending application
  * thread.
  */
+// NettyClientStream
 class NettyClientStream extends AbstractClientStream {
   private static final InternalMethodDescriptor methodDescriptorAccessor =
       new InternalMethodDescriptor(

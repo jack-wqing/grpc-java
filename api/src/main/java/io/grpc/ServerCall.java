@@ -37,6 +37,7 @@ import javax.annotation.Nullable;
  * @param <ReqT> parsed type of request message.
  * @param <RespT> parsed type of response message.
  */
+// 服务端接受远程请求的操作
 public abstract class ServerCall<ReqT, RespT> {
 
   /**
@@ -54,6 +55,7 @@ public abstract class ServerCall<ReqT, RespT> {
   // TODO(ejona86): We need to decide what to do in the case of server closing with non-cancellation
   // before client half closes. It may be that we treat such a case as an error. If we permit such
   // a case then we either get to generate a half close or purposefully omit it.
+    // 服务端监听消息
   public abstract static class Listener<ReqT> {
     /**
      * A request message has been received. For streaming calls, there may be zero or more request

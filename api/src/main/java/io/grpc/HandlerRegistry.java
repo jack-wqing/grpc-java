@@ -24,6 +24,7 @@ import javax.annotation.concurrent.ThreadSafe;
 /**
  * Registry of services and their methods used by servers to dispatching incoming calls.
  */
+// 服务与服务方法注册表
 @ThreadSafe
 public abstract class HandlerRegistry {
 

@@ -20,6 +20,7 @@ package io.grpc.internal;
  * A listener to a server for transport creation events. The listener need not be thread-safe, so
  * notifications must be properly synchronized externally.
  */
+// 监听Transport的创建
 public interface ServerListener {
 
   /**

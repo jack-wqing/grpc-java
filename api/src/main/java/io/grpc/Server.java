@@ -27,6 +27,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * Server for listening for and dispatching incoming calls. It is not expected to be implemented by
  * application code or interceptors.
  */
+// gRPC框架级别的服务端Server
 @ThreadSafe
 public abstract class Server {
 

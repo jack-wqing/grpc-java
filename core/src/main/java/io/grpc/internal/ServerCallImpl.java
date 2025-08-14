@@ -49,6 +49,7 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//服务端ServerCall
 final class ServerCallImpl<ReqT, RespT> extends ServerCall<ReqT, RespT> {
 
   private static final Logger log = Logger.getLogger(ServerCallImpl.class.getName());
@@ -229,7 +230,7 @@ final class ServerCallImpl<ReqT, RespT> extends ServerCall<ReqT, RespT> {
   public boolean isCancelled() {
     return cancelled;
   }
-
+  // 进入服务端的消息
   ServerStreamListener newServerStreamListener(ServerCall.Listener<ReqT> listener) {
     return new ServerStreamListenerImpl<>(this, listener, context);
   }

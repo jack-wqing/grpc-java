@@ -39,6 +39,7 @@ import javax.annotation.concurrent.ThreadSafe;
  *
  * @since 1.32.0
  */
+// 默认的ManagedChannel Registry
 @Internal
 @ThreadSafe
 public final class ManagedChannelRegistry {

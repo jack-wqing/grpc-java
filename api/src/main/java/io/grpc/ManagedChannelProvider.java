@@ -32,6 +32,7 @@ import java.util.Collection;
  * exceptions may reasonably occur for implementation-specific reasons, implementations should
  * generally handle the exception gracefully and return {@code false} from {@link #isAvailable()}.
  */
+// ManagedChannelProvider: 提供ManagedChannel
 @Internal
 public abstract class ManagedChannelProvider {
   /**

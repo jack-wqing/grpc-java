@@ -36,6 +36,7 @@ import java.util.logging.Logger;
  *  the previous channel (id and target) that has not been shutdown. This is done to avoid Object
  *  finalizers.
  */
+// 内存管理优化
 final class ManagedChannelOrphanWrapper extends ForwardingManagedChannel {
   private static final ReferenceQueue<ManagedChannelOrphanWrapper> refqueue =
       new ReferenceQueue<>();

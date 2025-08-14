@@ -32,6 +32,7 @@ import javax.annotation.Nullable;
  * @param <T> The concrete type of this builder.
  * @since 1.0.0
  */
+// 统一抽象的服务端Builder
 public abstract class ServerBuilder<T extends ServerBuilder<T>> {
 
   /**

@@ -65,6 +65,7 @@ import javax.net.ssl.SSLException;
 /**
  * A builder to help simplify the construction of a Netty-based GRPC server.
  */
+// Netty 实现的ServerBuilder
 @ExperimentalApi("https://github.com/grpc/grpc-java/issues/1784")
 @CheckReturnValue
 public final class NettyServerBuilder extends ForwardingServerBuilder<NettyServerBuilder> {
@@ -85,6 +86,7 @@ public final class NettyServerBuilder extends ForwardingServerBuilder<NettyServe
   private static final ObjectPool<? extends EventLoopGroup> DEFAULT_WORKER_EVENT_LOOP_GROUP_POOL =
       SharedResourcePool.forResource(Utils.DEFAULT_WORKER_EVENT_LOOP_GROUP);
 
+  // ServerImplBuilder
   private final ServerImplBuilder serverImplBuilder;
   private final List<SocketAddress> listenAddresses = new ArrayList<>();
 
@@ -160,6 +162,7 @@ public final class NettyServerBuilder extends ForwardingServerBuilder<NettyServe
     return new NettyServerBuilder(address, result.negotiator);
   }
 
+  // InterServer 一个 socket
   private final class NettyClientTransportServersBuilder implements ClientTransportServersBuilder {
     @Override
     public InternalServer buildClientTransportServers(
@@ -669,6 +672,7 @@ public final class NettyServerBuilder extends ForwardingServerBuilder<NettyServe
     this.eagAttributes = checkNotNull(eagAttributes, "eagAttributes");
   }
 
+  // NettyServer: Netty实现的InternalServer
   NettyServer buildTransportServers(
       List<? extends ServerStreamTracer.Factory> streamTracerFactories) {
     assertEventLoopsAndChannelType();

@@ -28,6 +28,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * An object that accepts new incoming connections on one or more listening socket addresses.
  * This would commonly encapsulate a bound socket that {@code accept()}s new connections.
  */
+// 表示真实的Server：accept接受新的连接
 @ThreadSafe
 public interface InternalServer {
   /**
@@ -38,6 +39,7 @@ public interface InternalServer {
    * @param listener non-{@code null} listener of server events
    * @throws IOException if unable to bind
    */
+
   void start(ServerListener listener) throws IOException;
 
   /**

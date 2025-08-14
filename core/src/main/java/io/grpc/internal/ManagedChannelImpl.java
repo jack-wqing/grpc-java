@@ -120,6 +120,7 @@ import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 
 /** A communication channel for making outgoing RPCs. */
+// Client 向服务端发送RPC Channel
 @ThreadSafe
 final class ManagedChannelImpl extends ManagedChannel implements
     InternalInstrumented<ChannelStats> {
@@ -165,6 +166,8 @@ final class ManagedChannelImpl extends ManagedChannel implements
   private final NameResolverRegistry nameResolverRegistry;
   private final NameResolver.Args nameResolverArgs;
   private final AutoConfiguredLoadBalancerFactory loadBalancerFactory;
+
+  // ClientTransportFactory
   private final ClientTransportFactory originalTransportFactory;
   @Nullable
   private final ChannelCredentials originalChannelCreds;
@@ -469,7 +472,7 @@ final class ManagedChannelImpl extends ManagedChannel implements
       nameResolver.refresh();
     }
   }
-
+  // ClientStreamProvider
   private final class ChannelStreamProvider implements ClientStreamProvider {
     volatile Throttle throttle;
 
@@ -948,6 +951,7 @@ final class ManagedChannelImpl extends ManagedChannel implements
     // same target, the new instance must have the same value.
     private final String authority;
 
+    // 客户端抽象的ClientCall
     private final Channel clientCallImplChannel = new Channel() {
       @Override
       public <RequestT, ResponseT> ClientCall<RequestT, ResponseT> newCall(

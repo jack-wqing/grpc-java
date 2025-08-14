@@ -61,6 +61,8 @@ import javax.annotation.Nullable;
 /**
  * Default managed channel builder, for usage in Transport implementations.
  */
+// builder创建的ManagedChannelImpleBuillder
+  // 主要是build方法创建ManagedChannel
 public final class ManagedChannelImplBuilder
     extends ManagedChannelBuilder<ManagedChannelImplBuilder> {
   private static final String DIRECT_ADDRESS_SCHEME = "directaddress";

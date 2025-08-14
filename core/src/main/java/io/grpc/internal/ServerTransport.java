@@ -22,6 +22,7 @@ import io.grpc.Status;
 import java.util.concurrent.ScheduledExecutorService;
 
 /** An inbound connection. */
+// 一个服务端连接
 public interface ServerTransport extends InternalInstrumented<SocketStats> {
   /**
    * Initiates an orderly shutdown of the transport. Existing streams continue, but new streams will
