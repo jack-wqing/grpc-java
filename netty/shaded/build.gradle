@@ -133,6 +133,58 @@ tasks.named("test").configure {
     dependsOn tasks.named("testShadow")
 }
 
+tasks.register("shadedSourcesJar", Jar) {
+
+    archiveClassifier = "sources"
+
+    from project(":grpc-netty").sourceSets.main.allSource
+
+    include "io/grpc/netty/**"
+
+
+    // 修改源码文件路径
+    eachFile { file ->
+
+        if (file.path.startsWith("io/grpc/netty/")) {
+            file.path =
+                    file.path.replace(
+                            "io/grpc/netty/",
+                            "io/grpc/netty/shaded/io/grpc/netty/"
+                    )
+        }
+    }
+
+
+    // 修改 java 源码内容
+    filesMatching("**/*.java") {
+
+        filter { line ->
+
+            line
+            // package io.grpc.netty;
+                    .replace(
+                            "package io.grpc.netty;",
+                            "package io.grpc.netty.shaded.io.grpc.netty;"
+                    )
+
+            // import io.grpc.netty.xxx;
+                    .replace(
+                            "import io.grpc.netty.",
+                            "import io.grpc.netty.shaded.io.grpc.netty."
+                    )
+
+            // import io.netty.xxx;
+                    .replace(
+                            "import io.netty.",
+                            "import io.grpc.netty.shaded.io.netty."
+                    )
+        }
+    }
+
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 /**
  * A Transformer which updates the Netty JAR META-INF/ resources to accurately
  * reference shaded class names.
